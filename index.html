@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetailMind 360° · Demos & Presentaciones</title>
+    <link rel="shortcut icon" href="https://gestor-de-archivos.vercel.app/logos/logo-RetailMind-R-cuadrada.png" type="image/png">
+    
+    <!-- Fuentes: Cinzel para números (elegancia clásica) + Inter para texto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-dark: #0f172a;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --accent: #1e3a8a;
+            --accent-light: #3b82f6;
+            --emerald: #10b981;
+            --border: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+            --shadow-md: 0 4px 20px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.12);
+            --shadow-accent: 0 12px 30px rgba(30, 58, 138, 0.18);
+        }
+
+        body {
+            background: var(--bg);
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(30, 58, 138, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.03) 0%, transparent 40%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            font-size: 14px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .header {
+            padding: 2.5rem 2rem 1rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-logo img {
+            height: 44px;
+            width: 44px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .header-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-brand-name {
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            color: var(--text);
+        }
+
+        .header-brand-tag {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(30, 58, 138, 0.06);
+            border: 1px solid rgba(30, 58, 138, 0.15);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .header-badge i {
+            font-size: 10px;
+        }
+
+        /* ============================================================
+           HERO
+           ============================================================ */
+        .hero {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 2rem 3rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.15;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent), var(--emerald));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 15px;
+            color: var(--text-muted);
+            max-width: 620px;
+            margin: 0 auto;
+            line-height: 1.65;
+        }
+
+        .hero-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--emerald));
+            border-radius: 2px;
+            margin: 1.5rem auto 0;
+        }
+
+        /* ============================================================
+           GRID DE CARDS
+           ============================================================ */
+        .grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 980px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .grid { grid-template-columns: 1fr; padding: 0 1.25rem 3rem; }
+            .header { padding: 1.5rem 1.25rem 0.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .header-badge { align-self: flex-start; }
+            .hero { padding: 1.5rem 1.25rem 2rem; }
+        }
+
+        /* ============================================================
+           CARD
+           ============================================================ */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem 1.75rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            min-height: 320px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--emerald));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Número grande */
+        .card-number {
+            font-family: 'Cinzel', serif;
+            font-size: 72px;
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -3px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--emerald) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.25rem;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover .card-number {
+            opacity: 1;
+        }
+
+        /* Contenido */
+        .card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.3px;
+            line-height: 1.35;
+        }
+
+        .card-subtitle {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            line-height: 1.55;
+            font-weight: 400;
+        }
+
+        /* Link */
+        .card-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            transition: all 0.25s ease;
+        }
+
+        .card-link-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(30, 58, 138, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .card-link {
+            color: var(--emerald);
+        }
+
+        .card:hover .card-link-icon {
+            background: var(--accent);
+            color: white;
+            transform: translateX(4px) rotate(-45deg);
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .footer {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .footer-brand {
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.3px;
+        }
+
+        .footer-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--emerald);
+            display: inline-block;
+            margin: 0 8px;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 640px) {
+            .footer { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         HEADER
+         ============================================================ -->
+    <header class="header">
+        <div class="header-logo">
+            <img src="https://gestor-de-archivos.vercel.app/logos/logo-RetailMind-R-cuadrada.png" alt="RetailMind 360°">
+            <div class="header-brand">
+                <span class="header-brand-name">RetailMind 360°</span>
+                <span class="header-brand-tag">Analítica Corporativa</span>
+            </div>
+        </div>
+        <div class="header-badge">
+            <i class="fas fa-circle"></i>
+            Presentación Ejecutiva · 6 Demos
+        </div>
+    </header>
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="hero">
+        <h1>Seis módulos. Una sola <span class="highlight">metodología de retail</span>.</h1>
+        <p>
+            Recorrido guiado por los demos del ecosistema RetailMind 360°: desde el diagnóstico estratégico
+            hasta el análisis técnico de velas japonesas aplicado a operaciones.
+        </p>
+        <div class="hero-divider"></div>
+    </section>
+
+    <!-- ============================================================
+         GRID DE CARDS (6 demos)
+         ============================================================ -->
+    <main class="grid">
+
+        <!-- CARD 1: DODET -->
+        <a href="https://gestor-de-archivos.vercel.app/Demo-KALEA/landing-DODET.html" class="card" target="_blank" rel="noopener">
+            <div class="card-number">01</div>
+            <div class="card-content">
+                <h3 class="card-title">DODET · Diagnóstico de Oportunidades con Doble Escenario de Tiendas</h3>
+                <p class="card-subtitle">Constructor de Escenarios con IA AVANZADO</p>
+            </div>
+            <div class="card-link">
+                <span>Abrir Demo</span>
+                <div class="card-link-icon">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </a>
+
+        <!-- CARD 2: RetailMind 360° -->
+        <a href="https://gestor-de-archivos.vercel.app/demos.html" class="card" target="_blank" rel="noopener">
+            <div class="card-number">02</div>
+            <div class="card-content">
+                <h3 class="card-title">RetailMind 360° · Plataforma Unificada en la Nube con Analítica Predictiva</h3>
+                <p class="card-subtitle">Control total de su cadena de supermercados desde una sola pantalla</p>
+            </div>
+            <div class="card-link">
+                <span>Abrir Demo</span>
+                <div class="card-link-icon">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </a>
+
+        <!-- CARD 3: DODET Constructor -->
+        <a href="https://gestor-de-archivos.vercel.app/PRUEBAS/DODET%20%C2%B7%20Constructor%20de%20Escenarios-IA-DATOS.html" class="card" target="_blank" rel="noopener">
+            <div class="card-number">03</div>
+            <div class="card-content">
+                <h3 class="card-title">DODET · Constructor de Escenarios</h3>
+                <p class="card-subtitle">Matriz de KPIs Impactados por los Escenarios</p>
+            </div>
+            <div class="card-link">
+                <span>Abrir Demo</span>
+                <div class="card-link-icon">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </a>
+
+        <!-- CARD 4: Retailding Velas -->
+        <a href="https://gestor-de-archivos.vercel.app/Demo-KALEA/demo-analisis_de_velas_con_IA.html" class="card" target="_blank" rel="noopener">
+            <div class="card-number">04</div>
+            <div class="card-content">
+                <h3 class="card-title">Retailding · Análisis de Velas con IA</h3>
+                <p class="card-subtitle">MESH de Datos: Vector de Volatilidad Horaria (OHLC)</p>
+            </div>
+            <div class="card-link">
+                <span>Abrir Demo</span>
+                <div class="card-link-icon">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </a>
+
+        <!-- CARD 5: Taller Ejecutivo -->
+        <a href="https://gestor-de-archivos.vercel.app/Taller%20Retailding/landing-curso-2.html" class="card" target="_blank" rel="noopener">
+            <div class="card-number">05</div>
+            <div class="card-content">
+                <h3 class="card-title">Taller Ejecutivo · Retail + Trading</h3>
+                <p class="card-subtitle">¿Sabes realmente qué dicen tus tickets — o solo ves números?</p>
+            </div>
+            <div class="card-link">
+                <span>Abrir Demo</span>
+                <div class="card-link-icon">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </a>
+
+        <!-- CARD 6: Dashboard Ejecutivo -->
+        <a href="https://gestor-de-archivos.vercel.app/PITCH%20Inversionistas/mapa-de-impacto-tiendas-landing-page.html" class="card" target="_blank" rel="noopener">
+            <div class="card-number">06</div>
+            <div class="card-content">
+                <h3 class="card-title">Dashboard Ejecutivo · Mapa de Impacto, Riesgo y Oportunidad</h3>
+                <p class="card-subtitle">¿Sabes qué tiendas defender y cuáles abandonar antes de que llegue Walmart?</p>
+            </div>
+            <div class="card-link">
+                <span>Abrir Demo</span>
+                <div class="card-link-icon">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </a>
+
+    </main>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="footer">
+        <span class="footer-brand">RetailMind 360°</span>
+        <span>
+            <i class="fas fa-circle" style="font-size:6px; color: var(--emerald); vertical-align: middle; margin-right: 6px;"></i>
+            Metodología Retailding <span class="footer-dot"></span> Retail + Trading
+        </span>
+        <span>© 2026 · Todos los derechos reservados</span>
+    </footer>
+
+</body>
+</html>
